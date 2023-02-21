@@ -1,6 +1,3 @@
-import java.util.Arrays;
-import java.util.function.Predicate;
-
 public class Sheep {
 
    enum Animal {sheep, goat};
@@ -10,23 +7,18 @@ public class Sheep {
    }
    
    public static void reorder (Animal[] animals) {
+      // Initializing the counter for goats
       int n_goats = 0;
-      int n_sheeps = 0;
       for (int x=0; x < animals.length; x++) {
+         // We need to do something only when we detect goat
          if (animals[x] == Animal.goat) {
+            // Assignment of default state -> sheep, that is not needed to be rearranged
+            animals[x] = Animal.sheep;
+            // Counter n_goats is the second iterator
+            // Allowing to do swaps at the same time we count goats
+            animals[n_goats] = Animal.goat;
             n_goats++;
-         } else {
-            n_sheeps++;
          }
-      }
-      int y = 0;
-      while (y < n_goats) {
-         animals[y] = Animal.goat;
-         y++;
-      }
-      while (y < (n_sheeps + n_goats)) {
-         animals[y] = Animal.sheep;
-         y++;
       }
    }
 }
